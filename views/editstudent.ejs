@@ -1,0 +1,124 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Admin Place</title>
+    <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+    <div class="jumbotron" style="background-color: rgb(71, 109, 90); margin-bottom: 0px;">
+        <p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: x-large;">Admin Portal</p>     
+    </div>
+    <% if(message.length>0){%>
+        <div class="card alert alert-success" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+            </div> 
+          </div> 
+      <%}%>
+    <h3 id="h3">Edit Student Record</h3>
+    <form action="/editstudent1" method="POST"> 
+    <div class="container2" style="margin-left: 15%; width: 50%;">
+        <table class="table">
+            <tr>
+                <td style="width: 60%;">
+                    <input type="text" class="form-control" name="enrollment" id="enrollment" placeholder="Enter enrollment id">
+                </td>
+                <td> 
+                   <button type="submit" class="btn btn-outline-dark" style="width: 100%;">Submit</button> 
+                </td>
+            </tr>
+        </table>
+    </div>  </form>
+    <%if(data.length){%>
+        <%for(var i=0;i<data.length;i++){%>
+            <form action="/editstudent2/<%= data[i]._id%>" method="POST"> 
+          <div class="conatiner2" style="margin-left: 10%; width: 80%;"> 
+              <table class="table">
+                  <tr>
+                      <td>
+                          <label for="name">Name</label>
+                      </td>
+                      <td>
+                          <input type="text" name="name1" class="form-control" value="<%= data[i].name%>">
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <label for="enroll">Enrollment Id</label>
+                    </td>
+                    <td>
+                        <input type="text" name="enroll1" class="form-control" value="<%= data[i].enroll_id%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="fname">Father's Name</label>
+                    </td>
+                    <td>
+                        <input type="text" name="fname1" class="form-control" value="<%= data[i].fname%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="dob">Date Of Birth</label>
+                    </td>
+                    <td>
+                        <input type="date" name="dob1" class="form-control" value="<%= data[i].dob%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="gender">Gender</label>
+                    </td>
+                    <td>
+                        <select name="gender1" class="form-control" id="gender1">
+                            <option><%= data[i].gender%></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="cour">Course</label>
+                    </td>
+                    <td>
+                        <input type="text" name="cour1" class="form-control" value="<%= data[i].course%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="seme">Semester</label>
+                    </td>
+                    <td>
+                        <input type="text" name="seme" class="form-control" value="<%= data[i].sem%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="bsy">Batch Start</label>
+                    </td>
+                    <td>
+                        <input type="date" name="bsy1" class="form-control" value="<%= data[i].bsy%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="bey">Batch End</label>
+                    </td>
+                    <td>
+                        <input type="date" name="bey1" class="form-control" value="<%= data[i].bey%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"> 
+                        <button style="width: 50%; margin-left: 30%;" type="submit" class="btn btn-outline-dark">Submit</button> 
+                    </td>
+                </tr>
+              </table>
+          </div></form>  <br><br><br>
+    <%}}%>
+</body>

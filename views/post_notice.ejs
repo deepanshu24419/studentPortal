@@ -1,0 +1,65 @@
+<%-include ('partials/theader')%>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <h4 style="font-family: Georgia, 'Times New Roman', Times, serif;">Post Notice Here</h4>
+</head>
+<body>
+  <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td><i class="fas fa-user"></i> <%= loginName%></td>
+      </tr>
+    </table>
+  </div>
+  <% if(message.length>0){%>
+    <div class="card alert alert-success" style="width: 100%;">
+        <div class="card-body">
+          <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+        </div> 
+      </div> 
+  <%}%>
+<form action="/post_notice1" method="POST" style="width: 50%; margin-left: 10%; margin-top: 3%; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold;">  
+    <div class="form-group">
+      <i class="fas fa-calendar-alt"></i><p style="display: inline; font-family: 'Times New Roman', Times, serif; " id="time" name="time"> </p><br><br>
+      <label for="sub">Subject</label>
+       <input type="text" class="form-control" name="sub" required/>
+    </div>
+    <div class="form-group">
+      <label for="msg">Message</label>
+      <textarea class="form-control" name="msg" rows="3" required></textarea>
+    </div>
+    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="font-weight: bold; width: 100%;">
+        Submit
+    </button>
+  </form><br>
+  <h4 style="font-family: Georgia, 'Times New Roman', Times, serif;">Earlier Notices</h4>
+  <div class="container" style="margin-top: 2%;">
+    <% if(cirData.length>0){%>
+    <% cirData.forEach(function(msg){%>
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">Notice Dated</h5>
+          <p class="card-text"><%= msg.date%></p>
+          <h5 class="card-title">Subject</h5>
+          <p class="card-text"><%= msg.subject%></p>
+          <h5 class="card-subtitle mb-2 text-muted">Notice</h5>
+          <p class="card-text"><%= msg.message%></p>
+        </div> 
+      </div> <br>      
+      <%})} else {%>
+        <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <p class="card-text" style="text-align: center;">No Notice Found</p>
+          </div> 
+        </div> 
+        <%}%>
+   </div><br><br><br>
+   <script>
+    var today=new Date();
+    var date=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    document.getElementById("time").innerHTML=date;
+</script>
+</body>
+<%-include ('partials/footer')%>

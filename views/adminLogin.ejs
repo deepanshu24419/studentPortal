@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Login</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<% if(message.length>0){%>
+		<div class="card alert alert-success" style="height: 5%; width: 100%;">
+			<div class="card-body">
+			  <p class="card-text" style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><%= message%></p>
+			</div> 
+		  </div> 
+	  <%}%>
+	<img class="wave" src='Images/wave.png'>
+	<div class="container">
+		<div class="img">
+      <img src='Images/adminLogin.svg'>
+		</div>
+		<div class="login-content">
+			<form action="/Admin_login" method="POST">
+				<img src='Images/st.svg'>
+				<h2 class="title">Admin Login</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-id-badge"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Admin Id</h5>
+           		   		<input type="text" name="aid" id="aid" class="input">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" name="apass" id="apass" class="input">
+            	   </div>
+            	</div>
+				<a style="color:darkolivegreen; font-weight: bold;" href="/AdminForget">Forgot Password?</a>
+            	<input type="submit" class="btn" value="Login">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

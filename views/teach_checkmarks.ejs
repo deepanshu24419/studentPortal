@@ -1,0 +1,105 @@
+<%- include('partials/theader')%>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.css">
+     <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+  <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td><i class="fas fa-user"></i> <%= loginName%></td>
+      </tr>
+    </table>
+  </div>
+    <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;">Examination Results</h2>
+    <form action="/get_marks" method="POST">
+      <div class="container2" style="overflow-x:auto;">
+        <table class="table">
+          <tr>
+            <td>
+              <select  class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;" name="exam" >
+                <option>Select exam</option>
+                <%for(var k=0;k<examData.length;k++){%>
+                <option><%= examData[k]%> </option>
+                <%}%> 
+              </select>
+            </td>
+            <td style="width: 28%;">
+              <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;" name="sub"  >
+                <%for(var k=0;k<subData.length;k++){%>
+                <option><%= subData[k]%></option>
+                <%}%>
+              </select>
+            </td>
+            <td style="width: 25%;">
+              <input class="form-control"   type="text" name="enroll"  style="height: 45px" placeholder="Student enroll id" >
+            </td>
+            <td style="width: 18%;">
+              <button class="btn btn-outline-dark my-2 my-sm-0"   style="height: 43px; width: 100%;" type="submit" >
+               Submit</button>
+            </td>
+          </tr> 
+          <p style="color: red;">**Select atleast two fields</p>
+        </table>
+      </div> 
+    </form><hr>
+    <div class="container" style="overflow-x:auto;">
+          <% if(testData.length>0){var i=0%>
+            <table class="table" style="width:100%;">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Sno</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Enroll Id</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Exam</th>
+                  <th scope="col">Marks</th>
+                  <th scope="col">Total Marks</th>
+                  <th scope="col">Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%testData.forEach(function(test){%>
+                  <%if(test.result=="Pass"){%>
+                    <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ccffcc 100%)">
+                       <td><%= ++i%></td>
+                       <td><%= test.name%></td>
+                       <td><%= test.enroll_id%></td>
+                       <td><%= test.subject%></td>
+                       <td><%= test.date%></td>
+                       <td><%= test.exam_name%></td>
+                       <td><%= test.marks%></td>
+                       <td><%= test.marks_from%></td>
+                       <td><%= test.result%></td>
+                    </tr >
+                  <%} else{%>
+                    <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ff9999 80%)">
+                       <td><%= ++i%></td>
+                       <td><%= test.name%></td>
+                       <td><%= test.enroll_id%></td>
+                       <td><%= test.subject%></td>
+                       <td><%= test.date%></td>
+                       <td><%= test.exam_name%></td>
+                       <td><%= test.marks%></td>
+                       <td><%= test.marks_from%></td>
+                       <td><%= test.result%></td>
+                      </tr>
+                    <%}%>
+             <%})} else{%>
+              <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center;">No Record Found</p>
+                </div> 
+              </div> <br>
+          <%}%>
+              </tbody>
+            </table>
+      </div>
+<br><br><br>
+</body>
+<%- include('partials/footer')%>

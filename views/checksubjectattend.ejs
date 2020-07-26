@@ -1,0 +1,87 @@
+<%-include ('partials/theader')%>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Subject Attendance</title>
+    <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+  <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td><i class="fas fa-user"></i> <%= loginName%></td>
+      </tr>
+    </table>
+  </div>
+ <h2 id="h2">Check Attendance</h2>
+<form action="/checksubjectattendance" method="POST">
+  <div class="container2" style="margin-left: 3%;">
+    <table class="table">
+      <tr>
+        <td style="width: 40%;">
+          <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;" name="sub">
+            <%for(var i=0;i<subData.length;i++){%>
+              <option><%= subData[i]%></option>
+              <%}%>
+          </select>
+        </td>
+        <td>
+          <input class="btn-outline-secondary form-control mr-sm-2" type="date" name="attDate" required>
+        </td>
+        <td>
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="font-weight: bold; width: 100%;"> Submit</button>
+        </td>
+      </tr>
+    </table>
+  </div>  
+    </form>
+<div class="container" style="overflow-x:auto; margin-left: 3%;">
+  <% if(data.length>0){ var i=0%>
+      <table class="table" style="width:100%;">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Name</th>
+            <th scope="col">Enroll Id</th>
+            <th scope="col">Course</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Date</th>
+            <th scope="col">Attendance</th>
+          </tr>
+          <tr>
+        </thead>
+        <tbody>
+          <%data.forEach(function(item){%>
+            <%if(item.attend=="Present"){%>
+              <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ccffcc 100%)">
+                 <th scope="row"><%= ++i%></th>
+                 <td><%= item.name%></td>
+                 <td><%= item.enroll_id%></td>
+                 <td><%= item.course%></td>
+                 <td><%= item.subject%></td>
+                 <td><%= item.date%></td>
+                 <td> <%= item.attend%></td></tr >
+            <%} else{%>
+              <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ff9999 80%)">
+                 <th scope="row"><%= ++i%></th>
+                 <td><%= item.name%></td>
+                 <td><%= item.enroll_id%></td>
+                 <td><%= item.course%></td>
+                 <td><%= item.subject%></td>
+                 <td><%= item.date%></td>
+                 <td><%= item.attend%></td></tr>
+              <%}%>
+        
+          <%})} else{%>
+            <div class="card" style="width: 100%;">
+              <div class="card-body">
+                <p class="card-text" style="text-align: center;">No Record Found</p>
+              </div> 
+            </div> <br>
+        <%}%>
+        </tbody>
+      </table>
+</div><br><br><br>
+</body>
+<%-include ('partials/footer')%>

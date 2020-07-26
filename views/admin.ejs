@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <title>Admin Place</title>
+        <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    </head>
+    <body>  
+        <div class="jumbotron" style="background-color: rgb(71, 109, 90); margin-bottom: 0px;">
+            <p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: x-large;">Admin Portal</p>     
+           </div>
+      <% if(message.length>0){%>
+        <div class="card alert alert-success" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+            </div> 
+          </div> 
+      <%}%>
+      <h2 class="h2">Admin Place</h2><hr>
+      <h3 id="h3">Student</h3>
+      <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-3">
+              <form action="/addstudent" > 
+              <button type="submit" class="btn btn-outline-dark" style="font-family: 'Times New Roman', Times, serif;
+              font-weight: bold;width:100%;"><i class="fas fa-user-plus"></i> Add Student Record</button>
+              </form>
+          </div>
+          <div class="col-sm-3">
+            <form action="/editstudent" > 
+            <button type="submit" class="btn btn-outline-dark" style="font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;width:100%;"><i class="fas fa-user-plus"></i> Edit Student Record</button>
+            </form>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-outline-dark" style="width: 100%;" onclick="delStudent()"><i class="fas fa-user-minus"></i> Delete Teacher Record</button>
+            <div class="form-popup" id="DelStudForm" style="display: none;" >
+              <form action="/deletestudent" class="form-container" method="POST">
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="Denroll" placeholder="Enter Enrollment Id">
+                  </div>
+                  <button type="submit" class="btn btn-dark" style="width: 50%;">Delete</button>
+                  <button type="button"class="btn btn-danger" style="width: 30%;" onclick="closeStudent()">Close</button>
+                </form>
+            </div>
+        </div>
+        </div>
+      </div><hr>
+      <h3 id="h3">Teacher</h3>
+       <div class="row">
+        <div class="col-sm-1"></div>
+           <div class="col-sm-3">
+               <form action="/addteacher" method="GET">
+                <button  type="submit" class="btn btn-outline-dark" style="font-family: 'Times New Roman', Times, serif;
+                font-weight: bold; width:100%;"><i class="fas fa-user-plus"></i> Add Teacher Record</button>  
+               </form>
+            </div>
+            <div class="col-sm-3">
+                <form action="/editteacher" method="GET">
+                 <button  type="submit" class="btn btn-outline-dark" style="font-family: 'Times New Roman', Times, serif;
+                 font-weight: bold; width:100%;"><i class="fas fa-user-plus"></i> Edit Teacher Record</button>  
+                </form>
+             </div>
+           <div class="col-sm-3">
+            <button class="btn btn-outline-dark" style="width: 100%;" onclick="delTeacher()"><i class="fas fa-user-minus"></i> Delete Teacher Record</button>
+                  <div class="form-popup" id="DelTeachForm" style="display: none;" >
+                    <form action="/deleteteacher" class="form-container" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dtid" placeholder="Enter Teacher Id">
+                        </div>
+                        <button type="submit" class="btn btn-dark" style="width: 50%;">Delete</button>
+                        <button type="button"class="btn btn-danger" style="width: 30%;" onclick="closeTeacher()">Close</button>
+                      </form>
+                </div>
+            </div>
+       </div><hr>
+      <h3 id="h3">Course</h3>
+      <div class="container2" style="width: 70%;">
+          <form action="/addCourse" method="POST">
+          <table class="table">
+              <tr>
+                  <td style="width: 70%;"><input type="text" name="cour" id="cour" placeholder="Course name" class="form-control"></td>
+                  <td style="width:80%"><button style="width: 100%;" type="submit" class="btn btn-outline-dark">Add Course</button></td>
+              </tr>
+          </table>
+        </form>
+      </div>
+       <br><br><br>
+       <script>
+           function delTeacher(){
+               document.getElementById("DelTeachForm").style.display="block";
+           }
+           function closeTeacher(){
+               document.getElementById("DelTeachForm").style.display="none";
+           }
+           function delStudent(){
+               document.getElementById("DelStudForm").style.display="block";
+           }
+           function closeStudent(){
+               document.getElementById("DelStudForm").style.display="none";
+           }
+       </script>
+    </body>
+</html>

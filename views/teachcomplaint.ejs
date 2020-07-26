@@ -1,0 +1,40 @@
+<%-include ('partials/theader')%>
+<head>
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <title>Complaint Box</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h4 style=" font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;">Complaints</h4>
+</head>
+<body>
+  <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+  <table class="table" style="background-color: white">
+    <tr>
+      <td><i class="fas fa-user"></i> <%= loginName%></td>
+    </tr>
+  </table>
+</div>
+    <div class="container" style="width: 70%; margin-top: 2%; margin-left: 25%;">
+      <% if(comData.length>0){var i=0%>
+      <% comData.forEach(function(msg){++i%>
+        <button class="btn btn-dark"  type="button" style="width: 70%; height: 45px; background-image: linear-gradient(to right, #ffffff 5%, #030303 95%);" data-toggle="collapse" data-target="#collapse<%= msg.sub%>" aria-expanded="false" aria-controls="collapse<%= msg.sub%>">
+          <%= msg.sub%>
+        </button><br>
+        <label for="" hidden><%= msg.enroll_id%></label>  <br>
+        <div class="collapse" id="collapse<%= msg.sub%>">
+          <div class="card card-body" style="background-image: linear-gradient(to right, #ffffff 20%, #ff9999 80%);  width: 70%;">
+            <i class="fas fa-calendar-alt"></i><%= msg.date%><br>
+          <%= msg.message%>
+          </div> <br>
+        </div> 
+        <%})} else {%>
+          <div class="card" style="width: 50%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center;">No Record Found</p>
+            </div> 
+          </div> <br>
+          <%}%>
+     </div><br><br><br>
+</body>
+<%-include ('partials/footer')%>

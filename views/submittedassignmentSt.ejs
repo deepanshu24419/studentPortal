@@ -1,0 +1,114 @@
+<%-include('partials/stheader')%>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <title>Assignment</title>
+    <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+</head>
+<body>
+  <div class="container2" style="width: auto; position: absolute; top: 0mm; right: 0;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td>  
+          <%if(im==null){%>
+            <i class="fas fa-user"></i>
+            <%}else{%>
+        <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%= im%> alt="" class="image"> <%}%>
+         <%= loginName%>  </td>    
+      </tr> 
+    </table>
+  </div>
+    <h2 class="h2">Submitted Assignments</h2><hr>
+      <div class="container2"   style="overflow-x:auto;margin-left: 2%; width: 90%;">
+         <% if(message.length>0){%>
+          <div class="card alert alert-success" style="width: 100%;">
+              <div class="card-body">
+                <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+              </div> 
+            </div> 
+        <%}%> 
+        <%if(data.length>0){%>
+        <%for(var i=0;i<data.length;i++){%> 
+          <hr>
+            <table class="table" style="word-wrap: break-word;">
+                <thead>
+                  <tr>
+                    <td colspan="2">
+                      <i class="fas fa-calendar-alt"></i><%= data[i].date%>
+                    </td>
+                    <td colspan="3" style="text-align: center;">
+                       Due Date : <%= data[i].due_date%> 
+                    </td>
+                    <td colspan="3" style="text-align: center;"> Submitted Date : <%= data[i].submit_date%> 
+                    </td>
+                  </tr>
+                    <tr>
+                        <td style="width: 18%; border-right: groove; background-image: linear-gradient(to right, #ccffcc 100% ,#ffffff 20%);">
+                            <%= data[i].subject%>
+                        </td>
+                           <%if(data[i].message==null | data[i].message==""){%>
+                            <td style="width: 15%; border-right-style: groove;">
+                             No message 
+                            </td><%} else{%>
+                             <td style="width: 15%; border-right-style: groove;">
+                               <%= data[i].message%>
+                             </td>
+                             <%}%>
+                        <td style="width: 15%; ">
+                            <%= data[i].assPath.substr(21)%>
+                        </td>
+                        <td style="width: 10%;border-right: solid;">
+                            <form action="/SubAssignDownload/<%= data[i]._id%>" method="GET">
+                                <button class="btn btn-outline-dark my-2 my-sm-0"  style="width: 100%;" type="submit">
+                                  <i class="fas fa-file-download"></i> Download
+                                </button>
+                              </form>
+                        </td>
+                          <%if(data[i].st_message==null | data[i].st_message==""){%>
+                            <td style="width: 13%; border-right-style: groove;">
+                             No message 
+                            </td><%} else{%>
+                             <td style="width: 13%; border-right-style: groove;">
+                               <%= data[i].st_message%>
+                             </td>
+                             <%}%>
+                        <td style="width: 15%;">
+                            <%= data[i].fileuploadPath.substr(21)%>
+                        </td>
+                        <td style="width: 10%; border-right: groove; ">
+                          <form action="/SubmittedAssignDownload/<%= data[i]._id%>" method="GET">
+                          <button class="btn btn-outline-dark my-2 my-sm-0"  style="width: 100%;" type="submit">
+                            <i class="fas fa-file-download"></i> Download
+                          </button>
+                        </form>
+                      </td>
+                        <td style="width: 13%; background-image: linear-gradient( to right,  #ffffff 20%, #ff9999 80%)"> 
+                                <form action="/StudentReUpAssign/<%= data[i]._id%>/<%= data[i].subject%>" enctype="multipart/form-data" method="GET">
+                                  <%var today = new Date();
+                                  var dd = String(today.getDate()).padStart(2, '0');
+                                  var mm = String(today.getMonth() + 1).padStart(2, '0');  
+                                  var yyyy = today.getFullYear();
+                                  today = yyyy + '-' + mm + '-' + dd;
+                                  if(data[i].due_allowed=="on" && today>data[i].due_date){%>  
+                                  <button class="btn btn-outline-dark my-2 my-sm-0" data-toggle="tooltip" title="Due date is over" disabled style="width: 100%;" type="submit" ><i class="fas fa-file-upload"></i> Re-upload</button>
+                                  <%}else{%>
+                                    <button class="btn btn-outline-dark my-2 my-sm-0"   style="width: 100%;" type="submit" ><i class="fas fa-file-upload"></i> Re-upload</button>
+
+                                    <%}%>  
+                                </form>
+                              </div>
+                        </td>
+                    </tr>
+                </thead>
+            </table> 
+        <%}}else{%><br><br><br>
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center;">No Assignment Submitted</p>
+            </div> 
+          </div> <br>
+          <%}%>   
+      </div>
+</body><br><br><br><br><br><br><br>
+<%-include ('partials/footer')%>

@@ -1,0 +1,43 @@
+<%- include('partials/stheader')%>
+<head>
+   <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+       <title>Notice</title>
+       <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<h3 style="font-family:Georgia, 'Times New Roman', Times, serif;  margin-left: 2%;">Notices</h3><hr>
+<div class="container2" style="width: auto; position: absolute; top: 0mm; right: 0;">
+  <table class="table" style="background-color: white">
+    <tr>
+      <td>  
+        <%if(im==null){%>
+          <i class="fas fa-user"></i>
+          <%}else{%>
+      <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%=  im %> alt="" class="image"> <%}%>
+       <%= loginName%>  </td>    
+    </tr> 
+  </table>
+</div>
+  <div class="container" style="margin-top: 2%;">
+    <% if(cirData.length>0){%>
+    <% cirData.forEach(function(msg){%>
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">Notice Dated</h5>
+          <p class="card-text"><%= msg.date%></p>
+          <h5 class="card-title">Subject</h5>
+          <p class="card-text"><%= msg.subject%></p>
+          <h5 class="card-subtitle mb-2 text-muted">Notice</h5>
+          <p class="card-text"><%= msg.message%></p>
+        </div> 
+      </div> <br>      
+      <%})} else {%>
+        <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <p class="card-text" style="text-align: center;">No Notice Found</p>
+          </div> 
+        </div> 
+        <%}%>
+   </div>
+
+<%- include('partials/footer')%>

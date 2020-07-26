@@ -1,0 +1,53 @@
+<%- include('partials/stheader')%>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Assignment Re-submit</title>
+    <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body> <div class="container2" style="width: auto; position: absolute; top: 0mm; right: 0;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td>  
+            <%if(im==null){%>
+                <i class="fas fa-user"></i>
+                <%}else{%>
+        <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%=  im %> alt="" class="image"> <%}%>
+         <%= loginName%>  </td>    
+      </tr> 
+    </table>
+  </div><br><br>
+    <div class="container2" >
+        <form action="/AssignReupload/<%= data%>" method="POST" enctype="multipart/form-data">
+        <table class="table">
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <label for="sub"><%= data1%> Assignment</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="msg">Message</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="msg" id="msg" placeholder="Message if any">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="pic">File</label>
+                </td>
+                <td>
+                    <input type="file" class="form-control" name="pic" id="pic" required>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                        <button type="submit" class="btn btn-outline-dark" style="width: 70%;">Submit</button>  
+                </td>
+            </tr>
+        </table></form>
+    </div><br><br><br>
+</body>
+<%-include ('partials/footer')%>

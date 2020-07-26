@@ -1,0 +1,146 @@
+<%-include ('partials/theader')%>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Faculty</title>
+    <link rel="stylesheet" type="text/css"  href="css/home.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+   <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td><i class="fas fa-user"></i> <%= loginName%></td>
+      </tr>
+    </table>
+  </div>
+<% if(message.length>0){%>
+    <div class="card alert alert-success" style="width: 100%;">
+        <div class="card-body">
+          <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+        </div> 
+      </div> 
+  <%}%>
+<div class="container2" style= "overflow-x: auto; margin-left: 20px;">
+  <table class="table" > 
+        <%data.forEach(function(item){%>
+        <tr class="active-row">
+            <th>Name</th>
+            <td><%= item.t_name%></td>
+            <td></td>
+        </tr>
+        <tr class="active-row">
+          <th>Id</th>
+          <td><%= item.t_id%></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Mobile</th>
+          <td><%= item.mob%></td>
+          <td><button style="width: 100%;" class="btn btn-dark" onclick="mobChange()">Update</button>
+          <div class="form-popup" id="mobForm" style="display: none;">
+              <form action="/teachmobilechange" class="form-container" method="POST">
+                  <div class="form-group">
+                    <label for="newteachAddress">New Mobile Number</label><br>
+                    <input type="text" name="newteachMobile" id="newteachMobile" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-dark" style="width: 60%;">Update</button>
+                  <button type="button"class="btn btn-danger" style="width: 35%;" onclick="closeMob()">Close</button>
+                </form>
+          </div>
+          </td>
+      </tr>
+      <tr>
+          <th>Address</th>
+          <td><%= item.address%></td>
+          <td><button style="width: 100%;" class="btn btn-dark" onclick="addressChange()">Update</button>
+              <div class="form-popup" id="addressForm" style="display: none;">
+                  <form action="/teachaddresschange" method="POST" class="form-container">
+                      <div class="form-group">
+                        <label for="newteachAddress">New Address</label><br>
+                        <input type="text" name="newteachAddress" id="newteachAddress" class="form-control">
+                      </div>
+                      <button type="submit" class="btn btn-dark" style="width: 60%;">Update</button>
+                      <button type="button"class="btn btn-danger" style="width: 35%;" onclick="closeAddress()">Close</button>
+                    </form>
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <th>Father's Name</th>
+          <td><%= item.fname%></td>
+          <td><button style="width: 100%;" class="btn btn-dark" onclick="FNameChange()">Update</button>
+            <div class="form-popup" id="fatherForm" style="display: none;">
+                <form action="/teachFatherUpdate" method="POST" class="form-container">
+                    <div class="form-group">
+                      <label for="newteachFather">Father's Name</label><br>
+                      <input type="text" name="newteachFather" id="newteachFather" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-dark" style="width: 60%;">Update</button>
+                    <button type="button"class="btn btn-danger" style="width: 35%;" onclick="closeFName()">Close</button>
+                  </form>
+            </div>
+        </td>
+      </tr>
+      <tr>
+          <th>Email</th>
+          <td><%= item.email%></td>
+          <td><button style="width: 100%;" class="btn btn-dark" onclick="emailChange()">Update</button>
+              <div class="form-popup" id="emailForm" style="display: none;">
+                  <form action="/teachemailchange" method="POST" class="form-container">
+                      <div class="form-group">
+                        <label for="newteachEmail">New Address</label><br>
+                        <input type="text" name="newteachEmail" id="newteachEmail" class="form-control">
+                      </div>
+                      <button type="submit" class="btn btn-dark" style="width: 60%;">Update</button>
+                      <button type="button"class="btn btn-danger" style="width: 35%;" onclick="closeEmail()">Close</button>
+                    </form>
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <th>Working Since</th>
+          <td><%= item.work_since%></td>
+          <td></td>
+      </tr>
+      <%})%>
+    </table>
+   </div>
+   <script>
+    function mobChange()
+    {
+        document.getElementById("mobForm").style.display="block";
+    }
+    function closeMob()
+    {
+        document.getElementById("mobForm").style.display="none";
+    }
+
+    function addressChange()
+    {
+        document.getElementById("addressForm").style.display="block";
+    }
+    function closeAddress()
+    {
+        document.getElementById("addressForm").style.display="none";
+    }
+
+    function emailChange()
+    {
+        document.getElementById("emailForm").style.display="block";
+    }
+    function closeEmail()
+    {
+        document.getElementById("emailForm").style.display="none";
+    }
+    function FNameChange()
+    {
+        document.getElementById("fatherForm").style.display="block";
+    }
+    function closeFName()
+    {
+        document.getElementById("fatherForm").style.display="none";
+    }
+
+</script>
+<br><br>
+<%-include ('partials/footer')%>

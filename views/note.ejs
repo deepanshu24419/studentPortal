@@ -1,0 +1,60 @@
+<%-include ('partials/stheader')%>
+<!DOCTYPE html>
+<html>
+   <head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+       <title>Notes</title>
+       <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+   </head>
+   <body >
+    <div class="container2" style="width: auto; position: absolute;  top: 0mm; right: 0;">
+      <table class="table" style="background-color: white">
+        <tr>
+          <td>  
+            <%if(im==null){%>
+              <i class="fas fa-user"></i>
+              <%}else{%>
+          <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%=  im %> alt="" class="image"><%}%> 
+           <%= loginName%>  </td>    
+        </tr> 
+      </table>
+    </div>
+        <p style="margin-left: 50px; font-family:Georgia, 'Times New Roman', Times, serif; font-weight: bold; font-size: x-large;">Notes</p>
+            <hr>
+        <div class="container2" style="overflow-x:auto;">
+            <%if(data.length>0){%>
+                <% for(var i=0; i < data.length; i++) {%>  
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <td style="width:30%;border-right-style: dashed;">
+                             <%= data[i].subject%><br>
+                            <%= data[i].date%></td>
+                        <td style="width: 50%;">
+                            <%= data[i].picspath.substr(21) %>
+                        </td>
+                        <td style=" background-image: linear-gradient( to right,  #ffffff 20%, #8887e0 80%)">  
+                            <form action="/download/<%= data[i]._id%>" method="GET">
+                                <button class="btn btn-outline-dark my-2 my-sm-0"  style="width: 100%;" type="submit">
+                                  <i class="fas fa-file-download"></i> Download
+                                </button>
+                             </form>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <%}}else{%>
+                <br><br> 
+                        <div class="card" style="align-items: center; width: 100%;">
+                            <div class="card-body">
+                              <p class="card-text" style="text-align: center;">Notes are not available</p>
+                            </div> 
+                          </div> 
+                <%}%>
+        </div>
+         
+      </form><br><br><br><br>
+   </body>
+</html>
+<%-include ('partials/footer')%>

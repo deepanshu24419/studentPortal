@@ -1,0 +1,92 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Admin Place</title>
+  <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+  <div class="jumbotron" style="background-color: rgb(71, 109, 90); margin-bottom: 0px;">
+      <p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: x-large;">Admin Portal</p>     
+  </div>
+  <% if(message.length>0){%>
+    <div class="card alert alert-success" style="width: 100%;">
+        <div class="card-body">
+          <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+        </div> 
+      </div> 
+  <%}%>
+  <h3 id="h3">Edit Teacher Record</h3>
+  <form action="/editteacher1" method="POST"> 
+  <div class="container2" style="margin-left: 15%; width: 50%;">
+      <table class="table">
+          <tr>
+              <td style="width: 60%;">
+                  <input type="text" class="form-control" name="tid1" id="tid1" placeholder="Enter Tecaher Id">
+              </td>
+              <td> 
+                 <button type="submit" class="btn btn-outline-dark" style="width: 100%;">Submit</button> 
+              </td>
+          </tr>
+      </table>
+  </div>  </form>
+  <%if(data.length){%>
+      <%for(var i=0;i<data.length;i++){%>
+          <form action="/editteacher2/<%= data[i]._id%>" method="POST"> 
+        <div class="conatiner2" style="margin-left: 10%; width: 80%;"> 
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="tname">Name</label>
+                    </td>
+                    <td>
+                        <input type="text" name="tname" class="form-control" value="<%= data[i].t_name%>">
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                      <label for="tid">Teacher Id</label>
+                  </td>
+                  <td>
+                      <input type="text" name="tid" class="form-control" value="<%= data[i].t_id%>">
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="gender1">Gender</label>
+                  </td>
+                  <td>
+                      <select name="gender1" class="form-control" id="gender1">
+                          <option><%= data[i].gender%></option>
+                          <option>Male</option>
+                          <option>Female</option>
+                          <option>Other</option>
+                      </select>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="sub">Subject</label>
+                  </td>
+                  <td>
+                      <input type="text" name="sub" class="form-control" value="<%= data[i].subject%>">
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="work">Work Since</label>
+                  </td>
+                  <td>
+                      <input type="date" name="work" class="form-control" value="<%= data[i].work_since%>">
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2"> 
+                      <button style="width: 50%; margin-left: 30%;" type="submit" class="btn btn-outline-dark">Submit</button> 
+                  </td>
+              </tr>
+            </table>
+        </div></form>  <br><br><br>
+  <%}}%>
+</body>

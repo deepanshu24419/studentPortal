@@ -1,0 +1,53 @@
+
+.container {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-left: 0;
+  }
+  
+  .container .table{
+  border-collapse: collapse;
+  margin: 20px 0;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  }
+
+  
+.cont{
+    margin-left: 0;
+    display: -webkit-inline-box;
+}
+  .container .table tbody tr:last-of-type{
+  border-bottom: 2px solid rgb(26, 41, 3);
+  }
+  
+  .container .table th,td{
+  padding: 12px 15px;
+  font-family: 'Times New Roman', Times, serif;
+  }
+ 
+ 
+ 
+
+
+.container2 .table .form-popup {
+    border-radius: 0 10px 10px 10px;
+    display: none;
+    position: absolute;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  
+  /* Add styles to the form container */
+  .container2 .table .form-container {
+    width: 300px;
+    height: 150px;
+    padding: 10px;
+    background-color: whitesmoke;
+  }
+
+
+
+  

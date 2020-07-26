@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+  <div class="jumbotron" style="background-color: rgb(152, 221, 186); margin-bottom: 0px;">
+   <p style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: x-large;">Student Portal</p>     
+  </div>
+  <div class="sticky-top">
+<nav class="navbar nav-tabs navbar-expand-md  navbar-dark bg-dark" >
+  <a class="navbar-brand" href="/studenthome"><i class="fas fa-home"></i> Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="/note"><i class="fas fa-sticky-note"></i> Notes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/attendance"><i class="fas fa-calendar-alt"></i> Attendance</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+          <i class="fas fa-calendar-alt"></i> Assignments
+        </a>
+        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+          <a class="dropdown-item " href="/assupcoming"><i class="fas fa-check"></i> Assignment</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item " href="/submittedassignmentSt"><i class="fas fa-check-double"></i> Submitted</a>
+          </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/studentTest"><i class="fas fa-pencil-ruler"></i> Tests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/studentNotice"><i class="far fa-flag"></i> Notices</a>
+      </li>   
+      <li class="nav-item">
+        <a class="nav-link" href="/complaint"><i class="fas fa-balance-scale"></i> Complaints & Suggestions</a>
+      </li>   
+      <form action="/logout" method="GET"><button type="submit" class="btn btn-dark" data-toggle="tooltip"  title="Logout"><i class="fas fa-sign-out-alt"></i></button>  
+      </form>
+      </ul>
+    <!--<form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Query" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+    </form>-->
+  </div>
+</nav>
+</div>
+</body>
+</html>

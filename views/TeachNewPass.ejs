@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reset Password Form</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<% if(message.length>0){%>
+		<div class="card alert alert-success" style="height: 5%; width: 100%;">
+			<div class="card-body">
+			  <p class="card-text" style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><%= message%></p>
+			</div> 
+		  </div> 
+	  <%}%>
+	<img class="wave" src='Images/wave.png'>
+	<div class="container">
+		<div class="img">
+       <img src='Images/newPass.svg'> 
+		</div>
+		<div class="login-content">
+			<form action="/newTeachPass" method="post">
+				<h3 class="title">Change Password</h3><br>
+           		<div class="input-div one">
+					<div class="i"> 
+						<i class="fas fa-lock"></i>
+				   </div>
+           		   <div class="div">
+           		   		<h5>New Password</h5>
+           		   		<input type="password" class="input" name="password" required>
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Confirm New Password</h5>
+           		    	<input type="password" class="input" name="conpassword" required>
+            	   </div>
+            	</div>
+				<a style="color:darkolivegreen; font-weight: bold;" href="/teachLog">Login?</a>
+            	<input type="submit" class="btn" value="Reset Password">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<%-include ('partials/stheader')%>
+<head>
+       <meta charset="utf-8">
+       <title>Attendance</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+       <link rel="stylesheet" href="/css/attend.css">
+</head>
+<body>
+    <div class="container2" style="width: auto; position: absolute; top: 0mm; right: 0;">
+        <table class="table" style="background-color: white">
+          <tr>
+            <td>  <%if(im==null){%>
+                <i class="fas fa-user"></i>
+                <%}else{%>
+            <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%=  im %> alt="" class="image"> <%}%>
+             <%= loginName%>  </td>    
+          </tr> 
+        </table>
+      </div>
+    <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;"> Attendance</h2><hr>
+    <div class="container"  >
+        <%if(data.length>0){%>
+    <% for(var i=0;i<data.length;i++){%>
+    <% var rd=Math.round(data[i].count)%>
+       <div class="cont">
+           <form action="/attendanceof/<%= data[i]._id.subject%>" method="GET">
+            <button type="submit" >  
+           <div class="card">
+               <div class="box">
+                   <div class="percent">
+                       <svg>
+                           <circle cx="70" cy="70" r="70"></circle>
+                           <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 *<%= rd%>)/100)"></circle>
+                       </svg>
+                       <div class="number">
+                           <h2><%= rd%><span>%</span></h2>
+                       </div>
+                   </div>
+                   <h2 style="word-break:break-all;" class="text"><%= data[i]._id.subject%></h2>
+           </div>
+            </div> 
+        </button>
+        <hr>
+    </form>
+        </div><%if((i+1)%3==0){%>
+            <br>
+            <%}%>
+        <%}}else{%>
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center;">Attendance to be marked</p>
+                </div> 
+              </div> <br>
+          <%}%>  
+    </div><br><br><br>
+</body> 
+<%-include ('partials/footer')%>

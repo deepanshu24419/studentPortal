@@ -1,0 +1,84 @@
+<%-include ('partials/theader')%>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <title>Attendance</title>
+        <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    </head>
+    <body>
+      <div class="container2" style="width: auto; position: absolute; top: 0mm; right: 10%;">
+        <table class="table" style="background-color: white">
+          <tr>
+            <td> <i class="fas fa-user"></i><%= loginName%>  </td>    
+          </tr> 
+        </table>
+      </div>
+        <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;">Assignment Submissions</h2>
+        <div class="container"  style="overflow-x:auto;">
+            <% if(data.length>0){ var i=0%>
+              <table class="table" style="width:100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Sno</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Enroll Id</th>
+                    <th style=" border-right-style: groove;" scope="col">Due Date</th>
+                    <th scope="col">Submitted Date</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Assignment</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%data.forEach(function(att){%>
+                    <%if(att.submit_date<=att.due_date){%>
+                      <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ccffcc 100%)">
+                         <th scope="row"><%= ++i%></th>
+                         <td><%= att.name%></td>
+                         <td><%= att.enroll_id%></td>
+                         <td style=" border-right-style: groove;"><%= att.due_date%></td>
+                         <td><%= att.submit_date%></td>
+                         <td><%= att.subject%></td>
+                         <td><%= att.st_message%></td>
+                         <td><%= att.fileuploadPath.substr(21)%></td>
+                         <td style="width: 15%;"> 
+                          <form action="/SubAssignDownload/<%= att._id%>" method="GET">
+                            <button class="btn btn-outline-dark my-2 my-sm-0"  style="width: 100%;" type="submit">
+                              <i class="fas fa-file-download"></i> Download
+                            </button>
+                          </form>
+                         </td></tr>
+                    <%} else{%>
+                      <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ff9999 80%)">
+                        <th scope="row"><%= ++i%></th>
+                        <td><%= att.name%></td>
+                        <td><%= att.enroll_id%></td>
+                        <td style=" border-right-style: groove;"><%= att.due_date%></td>
+                        <td><%= att.submit_date%></td>
+                        <td><%= att.subject%></td>
+                        <td><%= att.st_message%></td>
+                        <td><%= att.fileuploadPath.substr(21)%></td>
+                        <td style="width: 15%;"> 
+                          <form action="/SubAssignDownload/<%= att._id%>" method="GET">
+                            <button class="btn btn-outline-dark my-2 my-sm-0"  style="width: 100%;" type="submit">
+                              <i class="fas fa-file-download"></i> Download
+                            </button>
+                          </form>
+                         </td></tr >
+                      <%}%>
+               <%})} else{%>
+                <div class="card" style="width: 100%;">
+                  <div class="card-body">
+                    <p class="card-text" style="text-align: center;">No Submissions</p>
+                  </div> 
+                </div> <br>
+            <%}%>
+                </tbody>
+              </table>
+        </div><br><br>
+          </body>
+      </html><br><br><br>
+      <%-include ('partials/footer')%>

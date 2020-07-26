@@ -1,0 +1,224 @@
+
+<%- include('partials/stheader')%>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Student home</title>
+    <link rel="stylesheet" type="text/css"  href="css/home.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+    <div class="container2" style=" width: auto; position: absolute; top: 0mm; right: 0px;">
+        <table class="table" style="top: 0mm; background-color: white">
+          <tr>
+            <td>   
+              <%if(im==null){%>
+                <i class="fas fa-user"></i>
+                <%}else{%>
+            <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%= im%> alt="" class="image"> <%}%>
+            <%= loginName%> 
+            <button style="border: none; border-color: white;"  onclick="upImage()" type="button" ><i class="fas fa-camera"></i></button> </td>   
+            <div class="form-popup" id="uploadImage" style="position: absolute;  display: none;">
+              <form action="/uploadImage" class="form-container" enctype="multipart/form-data" method="POST">
+                 <div style="height:0px;overflow:hidden">
+              <input type="file" id="fileInput" name="fileInput" />
+                </div>
+                  <button type="submit" class="btn btn-dark" >Update</button>
+                  <button type="button"class="btn btn-danger"  onclick="closeImage()">Close</button>
+              </form>
+            </div>
+          </tr> 
+        </table>
+      </div>
+    <% if(message.length>0){%>
+        <div class="card alert alert-success" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+            </div> 
+          </div> 
+      <%}%>
+     <div class="container2" style="overflow-x:auto; margin-left: 5%;">
+      <table class="table">
+          <%data.forEach(function(item){%>
+          <tr class="active-row">
+              <th>Name</th>
+              <td><%= item.name%></td>
+              <td></td>
+          </tr>
+          <tr class="active-row">
+            <th>Enroll id</th>
+            <td><%= item.enroll_id%></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Mobile</th>
+            <td><%= item.mob%></td>
+            <td><button class="btn btn-dark" style="width: 100%;" onclick="mobChange()">Update</button>
+            <div class="form-popup" id="mobForm">
+                <form action="/mobilechange" class="form-container" method="POST">
+                    <div class="form-group">
+                      <label for="newAddress">New Mobile Number</label><br>
+                      <input type="text" class="form-control" name="newMobile" placeholder="Enter mobile number"> 
+                    </div>
+                    <button type="submit" class="btn btn-dark" style="width: 50%;">Update</button>
+                    <button type="button"class="btn btn-danger" style="width: 30%;" onclick="closeMob()">Close</button>
+                  </form>
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td><%= item.address%></td>
+            <td><button class="btn btn-dark" style="width: 100%;" onclick="addressChange()">Update</button>
+                <div class="form-popup" id="addressForm">
+                    <form action="/addresschange" method="POST" class="form-container">
+                        <div class="form-group">
+                          <label for="newAddress">New Address</label><br>
+                          <input type="text" class="form-control" name="newAddress" placeholder="Enter address">
+                        </div>
+                        <button type="submit" class="btn btn-dark" style="width: 50%;">Update</button>
+                        <button type="button"class="btn btn-danger" style="width: 30%;" onclick="closeAddress()">Close</button>
+                      </form>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Course</th>
+            <td><%= item.course%></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Semester</th>
+            <td><%= item.sem%></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><%= item.email%></td>
+            <td><button class="btn btn-dark" style="width: 100%;" onclick="emailChange()">Update</button>
+                <div class="form-popup" id="emailForm">
+                    <form action="/emailchange" method="POST" class="form-container">
+                        <div class="form-group">
+                          <label for="newEmail">New Address</label><br>
+                          <input type="text" class="form-control" name="newEmail" placeholder="Enter email id">
+                        </div>
+                        <button type="submit" class="btn btn-dark" style="width: 50%;">Update</button>
+                        <button type="button"class="btn btn-danger" style="width: 30%;" onclick="closeEmail()">Close</button>
+                      </form>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Batch Started</th>
+            <td><%= item.bsy%></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Batch Completes</th>
+            <td><%= item.bey%></td>
+            <td></td>
+        </tr>
+        <%})%>
+      </table>
+     </div><br><br><hr>
+<form action="">
+<div class="cont" style="width: 60%;"> 
+    <div class="container2" style="width: 50%; "> 
+            <h5>Recent Assignment</h5>
+            <%if(aData.length>0){%>
+            <%for(var i=0;i<aData.length;i++){%>
+                <table class="table" style=" width: 90%; margin-left: 15px;">
+                   <tr>
+                     <td style=" text-align: center;">
+                        <a href="/assupcoming" style="text-decoration: none; color: black;"><%= aData[i].assPath.substr(21)%></a>
+                     </td>
+                   </tr>
+                </table><%}}else{%><br><br> 
+                    <div class="card" style="width: 80%;">
+                        <div class="card-body">
+                          <p class="card-text" style="text-align: center;">No Recent Assignment Found</p>
+                        </div> 
+                      </div> 
+                    <%}%> 
+            
+    </div>
+    <div class="container2" style="width: 50%;">
+            <h5>Recent Notices</h5>
+            <%if(noticeData.length>0){%>
+    <%for(var i=0;i<noticeData.length;i++){%>
+        <table class="table" style=" width: 90%; margin-left: 15px;">
+            <tr>
+                <td style="text-align: center; width: auto;">
+                   <a href="/studentnotice" style="text-decoration: none; color: black;"><%= noticeData[i].subject%></a>
+                </td>
+            </tr>
+        </table>
+        <%}}else{%><br><br>
+            <div class="card" style="width: 80%;">
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center;">No New Notice Found</p>
+                </div> 
+              </div> 
+              <%}%>
+    </div>
+<div class="container2" style="width: 50%;">
+        <h5>New Notes</h5>
+        <%if(cData.length>0){%>
+        <%for(var i=0;i<cData.length;i++){%>
+            <table class="table" style=" width: 90%; margin-left: 15px;">
+               <tr>
+                 <td style="text-align: center;">
+                    <a href="/note" style="text-decoration: none; color: black;"><%= cData[i].subject%>'s Notes</a>
+                 </td>
+               </tr>
+            </table><%}} else{%><br><br>
+                <div class="card" style="width: 80%;">
+                    <div class="card-body">
+                      <p class="card-text" style="text-align: center;">No New Message Found</p>
+                    </div> 
+                  </div> 
+                <%}%> 
+        
+</div></div>
+<hr>
+</form><br><br>
+<script>
+    function mobChange()
+    {
+        document.getElementById("mobForm").style.display="block";
+    }
+    function closeMob()
+    {
+        document.getElementById("mobForm").style.display="none";
+    }
+
+    function addressChange()
+    {
+        document.getElementById("addressForm").style.display="block";
+    }
+    function closeAddress()
+    {
+        document.getElementById("addressForm").style.display="none";
+    }
+
+    function emailChange()
+    {
+        document.getElementById("emailForm").style.display="block";
+    }
+    function closeEmail()
+    {
+        document.getElementById("emailForm").style.display="none";
+    }
+
+    function upImage()
+    {
+        $("#fileInput").click();
+        document.getElementById("uploadImage").style.display="block";
+    }
+    function closeImage()
+    {
+        document.getElementById("uploadImage").style.display="none";
+    }
+</script>
+</body>
+<%- include('partials/footer')%>

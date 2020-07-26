@@ -1,0 +1,56 @@
+<%-include ('partials/theader')%>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <title>Student Attendance</title>
+        <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    </head>
+    <body>
+     <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;">Check Attendance</h2>
+  <div class="container" style="overflow-x:auto;">
+      <% if(attData.length>0){ var i=0%>
+        <table class="table" style="width:100%;">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Sno</th>
+              <th scope="col">Enroll Id</th>
+              <th scope="col">Course</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Date</th>
+              <th scope="col">Attendance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%attData.forEach(function(att){%>
+              <%if(att.attend=="Present"){%>
+                <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ccffcc 100%)">
+                   <th scope="row"><%= ++i%></th>
+                   <td><%= att.enroll_id%></td>
+                   <td><%= att.course%></td>
+                   <td><%= att.subject%></td>
+                   <td><%= att.date%></td>
+                   <td><%= att.attend%></td></tr >
+              <%} else{%>
+                <tr style="background-image: linear-gradient(to right, #ffffff 20%, #ff9999 80%)">
+                   <th scope="row"><%= ++i%></th>
+                   <td><%= att.enroll_id%></td>
+                   <td><%= att.course%></td>
+                   <td><%= att.subject%></td>
+                   <td><%= att.date%></td>
+                   <td><%= att.attend%></td></tr>
+                <%}%>
+         <%})} else{%>
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center;">No Record Found</p>
+            </div> 
+          </div> <br>
+      <%}%>
+          </tbody>
+        </table>
+  </div>
+    </body>
+</html>
+<%-include ('partials/footer')%>

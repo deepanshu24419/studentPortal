@@ -1,0 +1,20 @@
+<%-include ('partials/header')%>
+ <head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+       <title>Compose</title>
+       <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+   </head>
+<h1>Compose</h1>
+
+<form  action="/compose" method="post">
+<div class="form-group">
+  <label for="text">Title</label>
+  
+ <label for="text">Post </label><textarea class="form-control" name="PostContent"  ></textarea>
+
+</div>
+<button type="submit" class= "btn btn-primary"name="publish">Publish</button>
+
+</form>
+<%-include ('partials/footer')%>

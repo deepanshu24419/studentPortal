@@ -1,0 +1,97 @@
+<%-include('partials/stheader')%>
+<html> 
+    <head>
+      <title>Assignment</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+      <link rel="stylesheet" type="text/css"  href="css/stylesheet.css"> 
+      <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    </head>
+    <body>
+      <div class="container2" style="width: auto; position: absolute; top: 0mm; right: 0;">
+        <table class="table" style="background-color: white">
+          <tr>
+            <td>  
+              <%if(im==null){%>
+                <i class="fas fa-user"></i>
+                <%}else{%>
+            <img style="height: 30px; border-radius: 10px 10px 10px 10px;" src=<%=  im %> alt="" class="image"> <%}%>
+             <%= loginName%>  </td>    
+          </tr> 
+        </table>
+      </div>
+      <h2 class="h2">Assignments</h2><hr>
+      <% if(message.length>0){%>
+        <div class="card alert alert-success" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+            </div> 
+          </div> 
+      <%}%>
+      <div class="container2" style="overflow-x:auto;">
+        <%if(data.length>0){%>
+        <%for(var i=0;i<data.length;i++){%>
+          <hr>
+          <table class="table" style="width: 100%;" id="table<%= data[i].assPath%>" style="word-wrap: break-word;">
+           <thead>
+             <tr>
+               <td colspan="1">
+                 <i class="fas fa-calendar-alt"></i><%= data[i].date%></hr></td>
+                 <td colspan="2" style="text-align: center;"> 
+                  <% if(data[i].due_allowed=="on"){%>
+                    <label style=" color: red;">**Submission is not allowed after due date</label>
+                    <%}%> 
+                 </td>
+                <td colspan="2" style="text-align: center;"> Due Date : <%= data[i].due_date%> </td>
+             </tr>
+             <tr>
+               <td style="width: 15%; border-right-style: groove; background-image: linear-gradient(to right,  #ccffcc 99%,#ffffff 1% )">
+                <label for="sub<%= data[i].assPath%>"><%= data[i].subject%></label>
+               </td>
+               <%if(data[i].message==null | data[i].message==""){%>
+               <td style="width: 15%; border-right-style: groove;">
+                No message 
+               </td><%} else{%>
+                <td style="width: 15%; border-right-style: groove;">
+                  <%= data[i].message%>
+                </td>
+                <%}%>
+               <td style="word-wrap: break-word; width: 30%;">
+                  <%= data[i].assPath.substr(21)%>
+               </td>
+               <td style="width: 10%;"> 
+                <form action="/AssignDownload/<%= data[i]._id%>" method="GET">
+                  <button class="btn btn-outline-dark my-2 my-sm-0"  style="width: 100%;" type="submit">
+                    <i class="fas fa-file-download"></i> Download
+                  </button>
+                </form>
+               </td>
+               <td style="width: 10%;">
+                <form action="/StudentUpAssign/<%= data[i]._id%>/<%= data[i].subject%>" method="GET">
+                  <%var today = new Date();
+                  var dd = String(today.getDate()).padStart(2, '0');
+                  var mm = String(today.getMonth() + 1).padStart(2, '0');  
+                  var yyyy = today.getFullYear();
+                  today = yyyy + '-' + mm + '-' + dd;
+                  if(data[i].due_allowed=="on" && today>data[i].due_date){%>
+                <button class="btn btn-outline-dark my-2 my-sm-0" data-toggle="tooltip" title="Due date is over" disabled  type="submit" style="width: 100%;">
+                  <i class="fas fa-file-upload"></i> Upload</button></form>
+                  <%}else{%>
+                    <button class="btn btn-outline-dark my-2 my-sm-0"   type="submit" style="width: 100%;">
+                      <i class="fas fa-file-upload"></i> Upload</button></form>
+                    <%}%>
+               </td>
+             </tr>
+           </thead>
+          </table> 
+        <%}}else{%>
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center;">No Assignment Found</p>
+            </div> 
+          </div> <br>
+          <%}%>
+      </div><br><br><br>
+    </body><br><br><br><br><br>
+</html>
+<%-include('partials/footer')%>

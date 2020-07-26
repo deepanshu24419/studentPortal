@@ -1,0 +1,132 @@
+<%- include('partials/theader')%>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+  <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+    <table class="table" style="background-color: white">
+      <tr>
+        <td><i class="fas fa-user"></i> <%= loginName%></td>
+      </tr>
+    </table>
+  </div>
+  <h3 id="h3">Post Marks</h3>
+ <form action="/enter_marks" method="POST">
+  <div class="container2">
+    <table class="table">
+      <tr>
+        <td>
+          <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;" name="cour" >
+              <%for(var k=0;k<courseData.length;k++){%>
+              <option><%= courseData[k]%></option>
+              <%}%>
+          </select>
+        </td>
+        <td>
+          <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;"  name="semester">
+            <option>Select semester</option>
+            <option> 1 </option>
+            <option> 2 </option>
+            <option> 3 </option>
+            <option> 4 </option>
+            <option> 5 </option>
+            <option> 6 </option>
+            <option> 7 </option>
+            <option> 8 </option>
+          </select>
+        </td>
+        <td>
+          <button class="btn btn-outline-dark my-2 my-sm-0" style="height: 44px; width: 100%;" type="submit" >
+            <b> Submit</button></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+ </form>
+<hr>
+<% if(message.length>0){%>
+  <div class="card alert alert-success" style="width: 100%;">
+      <div class="card-body">
+        <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+      </div> 
+    </div> 
+<%}%>
+ <form method="POST">
+  <%if (data.length>0){var i=0%>
+    <hr>
+    <div class="container2" style="overflow-x:auto;">
+      <table class="table">
+        <tr>
+          <td style="width:25%;">
+            <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%;" name="sub">
+             <%for(var k=0;k<subData.length;k++){%>
+              <option><%= subData[k]%></option>
+              <%}%>
+            </select>
+          </td>
+          <td>
+            <input type="text" name="exam" class="form-control" placeholder="Enter Exam Name" required/>
+          </td>
+          <td>
+            <input type="date" name="time" class="form-control"  required/>
+          </td>
+          <td>
+            <input type="text" class="form-control" name="passing" id="passing"  placeholder="Enter passing %" required/>
+          </td>
+        </tr>
+      </table>
+    </div><hr>
+      <div class="container" style="overflow-x:auto;">
+            <table class="table" id="table" style="width: 100%;">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Sno</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Enroll Id</th>
+                  <th scope="col"> Course</th>
+                  <th scope="col"> Semester</th>
+                  <th scope="col"> Marks</th>
+                </tr>
+              </thead>
+              <tbody>
+          <% data.forEach(function(item){%>
+          <tr>
+              <th scope="row"><%= ++i%></th>
+              <td><%= item.name%></td>
+              <td><%= item.enroll_id%></td>
+              <td><%= item.course%></td>
+              <td><%= item.sem%></td>
+              <td>
+                <input type="text" placeholder="Enter marks" class="form-control" style="width: 70%;" name="marks<%= item.enroll_id%>" id="marks<%= item.enroll_id%>" required>
+              </td>             
+            </tr>
+            <%if(data.length-i<1){%>
+              <tr style="border-top-style: solid; background-color: whitesmoke">
+                <td></td><td colspan="3">
+                  <input type="number" name="marks_from" id="marks_from" placeholder="Total Marks" class="form-control" required>
+                </td>
+                <td></td>
+                <td colspan="2">
+                  <button formaction="/post_marks/<%= item.course%>/<%= item.sem%>" type="submit" class="btn btn-outline-dark my-2 my-sm-0" style="height: 44px; width: 80%;">
+                    <b> Submit Marks</button>
+                </td>
+              </form>
+              </tr> 
+              <%}%>
+            <%})%>
+          </tbody>
+        </table></div>
+            <%} else{%>
+              <div class="card" style="width: 80%; margin-left: 10%;">
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center;">No Record Found</p>
+                </div> 
+              </div> 
+          <%}%>
+  <br><br><br>
+</body>
+<%- include('partials/footer')%>

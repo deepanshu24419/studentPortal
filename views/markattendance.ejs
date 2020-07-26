@@ -1,0 +1,124 @@
+<%-include ('partials/theader')%>
+<html>
+   <head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+       <title>Mark Attendance</title>
+       <link rel="stylesheet" type="text/css"  href="css/stylesheet.css">
+       <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+   </head>
+   <body>
+    <div class="container2" style="width: auto; position: absolute; top: 0px; right: 10%;">
+      <table class="table" style="background-color: white">
+        <tr>
+          <td><i class="fas fa-user"></i> <%= loginName%></td>
+        </tr>
+      </table>
+    </div>
+    <% if(message.length>0){%>
+      <div class="card alert alert-success" style="width: 100%;">
+          <div class="card-body">
+            <p class="card-text" style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><%= message%></p>
+          </div> 
+        </div> 
+    <%}%>
+    <form action="/get-data" method="POST">
+      <div class="container2">
+        <table class="table">
+          <tr>
+            <td>
+              <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;" name="cour" >
+                <option>Select a course</option>
+                <% for(var i=0;i<data1.length;i++){%>
+                  <option><%= data1[i]%></option>
+                  <%}%>
+              </select>
+            </td>
+            <td>
+              <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 44px;"  name="semester">
+                <option>Select semester</option>
+                <option> 1 </option>
+                <option> 2 </option>
+                <option> 3 </option>
+                <option> 4 </option>
+                <option> 5 </option>
+                <option> 6 </option>
+                <option> 7 </option>
+                <option> 8 </option>
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-outline-dark my-2 my-sm-0" style="height: 44px; width: 100%;" type="submit" >
+                <b> Submit</button></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </form>
+    <hr>
+      <div class="container" style="overflow-x:auto;">
+              <%if (data.length>0){var i=0%>
+                <i class="fas fa-calendar-alt"></i> <p id="time" name="time"></p>
+              <table class="table" id="table" name="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Sno</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Enroll Id</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Semester</th>
+                      <th scope="col">Attendance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+              <% data.forEach(function(item){%>
+                <tr>
+                  <th scope="row"><%= ++i%></th>
+                  <td><%= item.name%></td>
+                  <td><%= item.enroll_id%></td>
+                  <td><%= item.course%></td>
+                  <td><%= item.sem%></td>
+                  <form action="/post-attendance/<%= item.course%>/<%= item.sem%>" method="POST">
+                  <td> 
+                    <input type="radio"  id="Present" name="attend<%= item.enroll_id%>" value="Present">
+                    <label  for="Present">Present</label>
+                    <input type="radio"   id="Absent" name="attend<%= item.enroll_id%>" value="Absent">
+                    <label  for="Present">Absent</label>
+                  </td> 
+                  </tr>
+                  <%if(data.length-i<1){%>
+                    <tr style="border-top-style: solid; background-color: whitesmoke">
+                      <td colspan="4">
+                        <select class="btn btn-outline-secondary my-2 my-sm-0" style="width: 100%; height: 43px;" name="sub" id="sub">
+                          <%for(var k=0;k<subData.length;k++){%>
+                          <option><%= subData[k]%></option>
+                          <%}%>
+                        </select>
+                      </td>
+                      <td colspan="2">
+                        <button type="submit" class="btn btn-outline-dark my-2 my-sm-0" style="height: 44px; width: 80%;">
+                          <b> Submit Attendance</button>
+                      </td>
+                    </form>
+                    </tr> 
+                    <%}%>
+                <%})%>    
+               </tbody>
+             </table>
+                <%} else{%>
+                  <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                      <p class="card-text" style="text-align: center;">No Record Found</p>
+                    </div> 
+                  </div> <br>
+              <%}%>
+              
+           </div>
+    <script>
+        var today=new Date();
+        var date=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        document.getElementById("time").innerHTML=date;
+    </script><br><br><br><br>
+   </body>
+</html>
+<%-include ('partials/footer')%>
